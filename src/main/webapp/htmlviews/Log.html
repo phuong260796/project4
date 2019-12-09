@@ -1,0 +1,54 @@
+<section class="content" >
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Log Action</h3>
+                    <div style="margin-left:10px" class="form-inline">
+                    <input style="width: 150px; " type="text" class="form-control mb-2 mr-sm-2 mb-sm-0"
+                           ng-model="textSearch" name="customerName" placeholder="imput search" />
+                    <button type="submit" ng-click="search()" class="btn btn-primary">Search</button>
+                        </div>
+                </div>
+                <div class="box-body">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>computerName</th>
+                            <th>userWindow</th>
+                            <th>userName</th>
+                            <th>actionDescription</th>
+                            <th>formAction</th>
+                            <th>timeAction</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="data in dataLog">
+                            <td>{{data.id}}</td>
+                            <td>{{data.computerName}}</td>
+                            <td>{{data.userWindow}}</td>
+                            <td>{{data.userName}}</td>
+                            <td ng-bind-html="data.actionDescription"></td>
+                            <td>{{data.formAction}}</td>
+                            <td>{{data.timeAction}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--<div class="center">
+                    <ul>
+                    <div class="pagination" >
+                        <a ng-click="search()" class="down">&laquo;</a>
+                        <li ng-repeat="da in page">
+                          <a  ng-click="search()" ng-class="da===1?'active' : ''" class="changePage" >{{da}}</a>
+                        </li>
+                        <a ng-click="search()" class="nextPage hidden" >...</a>
+                        <a ng-click="search()" class="up">&raquo;</a>
+                    </div>
+                    </ul>
+                </div>-->
+            </div>
+        </div>
+    </div>
+</section>

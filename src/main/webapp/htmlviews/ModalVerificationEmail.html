@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <h3>Xác nhận tài khoản</h3>
+</div>
+<div class="modal-body">
+    <form>
+        <div class="form-group">
+            <span style="color: #00a65a">Chipo đã gửi mã xác nhận về tài khoản Email: {{dataEmaill.userName}} hãy điền mã vào đây để xác minh tài khoản của bạn.</span>
+            <input  type="text" placeholder="Nhập mã xác nhận" class="form-control" ng-model="code">
+        </div>
+        <span style="color: red">{{status}}</span>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal"  ng-click="cancel()" >Cancel</button>
+    <button type="button" class="btn btn-primary" ng-click="submitt(code)">Submit</button>
+</div>

@@ -1,0 +1,25 @@
+<div class="modal-header">
+    <h3>Add News</h3>
+</div>
+<div class="modal-body">
+    <form>
+        <div class="form-group">
+            <label  class="col-form-label">Title</label>
+            <input required type="text" class="form-control" ng-model="inputParam.title">
+        </div>
+        <div class="form-group">
+            <label >Content</label>
+            <textarea id="editor1" name="editor1" rows="10" cols="80" ng-model="inputParam.content"></textarea>
+        </div>
+        <div class="form-group">
+            <label  class="col-form-label">Category</label>
+            <select class="form-control" ng-init="inputParam.categoryId =listdata[0].id"  ng-options="data.id as data.name for data in listdata" ng-model="inputParam.categoryId">
+            </select>
+        </div>
+        <span style="color: red">{{status}}</span>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal"  ng-click="cancel()" >Cancel</button>
+    <button type="button" class="btn btn-primary" ng-click="addN(inputParam)">Submit</button>
+</div>

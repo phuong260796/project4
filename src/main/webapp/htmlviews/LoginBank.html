@@ -1,0 +1,69 @@
+
+
+<div class="row" style="margin-top: 30px;margin-left: 50px">
+    <div class="col-md-2">
+        <span>STK</span>
+        <input style="width: 150px; " type="text" class="form-control mb-2 mr-sm-2 mb-sm-0"
+               ng-model="inputParam.STK" name="customerName" placeholder="STK" />
+    </div>
+    <div class="col-md-2">
+        <span>Ngân hàng</span>
+            <select  class="form-control mb-2 mr-sm-2 mb-sm-0" ng-init="inputParam.bank = nganhang[0]" style="width: 150px"  ng-options="nganHang for nganHang in nganhang" ng-model="inputParam.bank"></select>
+    </div>
+    <div class="col-md-2">
+        <span>Trang thái</span>
+        <select  class="form-control mb-2 mr-sm-2 mb-sm-0" ng-init="inputParam.status =trangthai[0]" style="width: 150px"  ng-options="trangThai for trangThai in trangthai" ng-model="inputParam.status"></select>
+    </div>
+    <div class="col-md-2">
+        <span>Sắp xếp</span>
+        <select  class="form-control mb-2 mr-sm-2 mb-sm-0" ng-init="inputParam.orderBy = sapxep[0]" style="width: 150px"  ng-options="sapXep for sapXep in sapxep" ng-model="inputParam.orderBy"></select>
+    </div>
+    <div class="col-md-2" style="margin-top: 18px">
+        <button type="submit" ng-click="searchUserBank(inputParam)" class="btn btn-primary">Tìm kiếm</button>
+    </div>
+    <div class="col-md-2" style="margin-top: 18px">
+        <button class="btn btn-info btn btn-primary a-btn-slide-text" ng-click="addUserBank()"
+                style="margin-bottom: auto; ">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            <span><strong>Thêm mới</strong></span>
+        </button>
+    </div>
+</div>
+
+<div class="box-body" style="margin-top: 30px">
+    <table id="example2" class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Trạng thái</th>
+            <th>Sô tài khoản</th>
+            <th>Tên đăng nhập</th>
+            <th>Ngân hàng</th>
+<!--            <th>Số dư</th>-->
+            <th>Thời gian</th>
+            <th>Hành động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="data in dataRespone">
+            <td>{{data.id}}</td>
+            <td ng-class=""><button style="font-size: 12px;color: white;border: 0px" ng-class="{chuakichhoat:data.status ==='N',kichhoat:data.status!== 'N' }">{{data.status==="N" ? "Chưa kích hoạt"   : "Kích hoạt"}}</button></button></td>
+            <td>{{data.STK}}</td>
+            <td>{{data.userName}}</td>
+            <td>{{data.bank}}</td>
+<!--            <td>{{data.surplus}}</td>-->
+            <td>{{data.startDate}}<div ng-if="data.modifyDate"><br>{{data.modifyDate}}</div></td>
+            <td> <a ng-click="updateNewss(data.id)" class="btn btn-primary a-btn-slide-text">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                <span><strong>Sửa</strong></span>
+            </a>
+<!--                <a href="http://localhost:8181/#/InforBank/{{data.id}}" class="btn btn-primary a-btn-slide-text ">-->
+                <a href="http://localhost:8181/#/InforBank/{{data.id}}" class="btn btn-primary a-btn-slide-text ">
+                    <span><strong>Chi tiết tài khoản</strong></span>
+                </a></td></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+

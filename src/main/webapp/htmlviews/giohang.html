@@ -1,0 +1,46 @@
+<!--<div ng-repeat="data in dataa">-->
+<!--    <img  src="{{data.bigImageUrl}}">-->
+<!--    <span>{{data.name}}</span><br>-->
+<!--    <span>{{data.check}}</span>-->
+<!--</div>-->
+
+
+<section class="content" >
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Giỏ hàng</h3>
+                </div>
+                <div class="box-body id-{{data.cookieName}}" ng-repeat="data in dataa" >
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th width="42%">Sản phẩm</th>
+                            <th width="8%">Số lượng</th>
+                            <th width="15%">Đơn giá</th>
+                            <th width="15%">Tiền hàng</th>
+                            <th width="10%">thao tác</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr style="text-align: center;">
+                            <td> <img width="50" height="50" src="{{data.bigImageUrl}}">
+                                <span>{{data.name}}</span><br>
+                                <span>Đã chọn : {{data.check}}</span></td>
+                            <td><input ng-blur="updateAmount(data)" style="text-align: center"  width="10px" ng-model="data.count"></td>
+                            <td>¥{{data.priceChina}}<br>{{formatPrice(data.priceVn)}}vnđ</td>
+                            <td>¥{{formatPrice(data.priceChinaOfCount)}}<br>{{formatPrice(data.priceVnOfCount)}}vnđ</td>
+                            <td>
+                                <button type="button" class="btn btn-success">Lưu</button>
+                                <button ng-click="deleteCookies(data)" type="button" class="btn btn-danger">Xóa</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <span STYLE="font-size: 18px">TỔNG TIỀN : {{totalPrice}}vnđ</span>
+            </div>
+        </div>
+    </div>
+</section>

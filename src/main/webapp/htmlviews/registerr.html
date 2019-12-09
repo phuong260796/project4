@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/css/bootstrap-modal-bs3patch.min.css"></script>
+    <script data-require="ui-bootstrap@*" data-semver="2.5.0"
+            src="https://cdn.rawgit.com/angular-ui/bootstrap/gh-pages/ui-bootstrap-tpls-2.5.0.js"></script>
+    <link rel="stylesheet" href="../css/register.css">
+    <script src="../ControllerJs/register.js"></script>
+</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<body  ng-app="register">
+<div ng-controller="registerController">
+    <div class="container">
+        <h1>Register</h1>
+        <hr>
+        <label ><b>Email</b></label>
+        <input type="text" ng-model="inputParam.userName" placeholder="Enter Email"  required>
+
+        <label ><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" ng-model="inputParam.password"  required>
+
+        <label ><b>Repeat Password</b></label>
+        <input type="password" ng-model="inputParam.passwordRepeat" placeholder="Confirm Password"  required><br>
+        <span style="color: red">{{status}}</span>
+        <hr>
+        <button type="submit" class="registerbtn" ng-click="registerFunction(inputParam)" >Register</button>
+        <div class="form-group">
+            <br>
+           <div style="text-align: center;"><a class="btn btn-info btn-md" href="http://localhost:8181/login">LOGIN</a></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id"
+          content="220066710916-bgn8jquci5g4cbobbo2cg7vq231eqqfl.apps.googleusercontent.com">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/login1.css">
+    <link rel="stylesheet" href="../css/login2.css">
+    <link rel="stylesheet" href="../css/login3.css">
+    <link rel="stylesheet" href="../css/login4.css">
+    <link rel="stylesheet" href="../css/login5.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.35.4/css/bootstrap-dialog.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <!--    <script src="../js/login.js"></script>-->
+    <script src="../ControllerJs/LoginController.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+    <script async defer crossorigin="anonymous"
+            src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v4.0&appId=513060062595617&autoLogAppEvents=1"></script>
+
+</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<body ng-app="login">
+<script>
+    function sendemail() {
+        $.ajax({
+            type: 'GET',
+            url: "http://localhost:8181/send-email",
+            contentType: "application/json",
+            success: function () {
+                alert("ngon");
+            }
+        });
+    }
+
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        var id_token = googleUser.getAuthResponse().id_token;
+        gapi.auth2.getAuthInstance().disconnect().then(function () {
+
+            $(document).ready(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: "http://localhost:8181/login-google/" + id_token,
+                    contentType: "application/json",
+                    success: function (response) {
+                        if (response === null) {
+                            alert("Đăng nhập thất bại,mời đăng nhập lại")
+                        } else {
+                            if (response.password == null) {
+                                if (typeof (Storage) !== 'undefined') {
+                                    localStorage.setItem('email', response.userName);
+                                } else {
+                                    alert('Trình duyệt của bạn không hỗ trợ localStorage. Hãy nâng cấp trình duyệt để sử dụng!');
+                                }
+                                setTimeout(function () {
+                                    window.location.href = "http://localhost:8181/htmlviews/RegisterWithFacebook.html";
+                                }, 500);
+                            } else {
+                                $.ajax({
+                                    type: 'POST',
+                                    url: "http://localhost:8181/check-login",
+                                    contentType: "application/json",
+                                    data: JSON.stringify(response),
+                                    success: function (respp) {
+                                        if (respp) {
+                                            setTimeout(function () {
+                                                // $rootScope.user = response.userName;
+                                                window.location.href = "http://localhost:8181/#/home";
+                                            }, 500);
+                                        } else {
+                                            alert('sai tai khoan hoac mat khau!');
+                                        }
+                                    },
+                                    error: function () {
+                                        alert('sai tai khoan hoac mat khau!');
+                                    }
+                                });
+                            }
+                        }
+                    }, error: function (jqXHR, exception) {
+                        alert("Đăng nhập không thành công,mời thử lại")
+                    },
+                })
+
+            });
+
+        })
+    }
+</script>
+<div id="fb-root"></div>
+<div id="login" ng-controller="LoginController">
+    <div class="container">
+        <div id="login-row" class="row justify-content-center align-items-center">
+            <div id="login-column" class="col-md-6">
+                <div id="login-box" class="col-md-12">
+                    <div id="login-form" class="form" style="height: auto; width: auto">
+                        <h3 class="text-center text-info">ĐĂNG NHẬP</h3>
+                        <div class="form-group">
+                            <label class="text-info">Email:</label><br>
+                            <input required type="text" name="username" ng-model="inputParam.userName"
+                                   class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="text-info">Mật khẩu:</label><br>
+                            <input required type="password" name="password" ng-model="inputParam.password"
+                                   class="form-control">
+                        </div>
+                        <div ng-click="checkReme(checkk)">
+                            <input  type="checkbox"  ng-model="checkk" id="Remember" name="Remember"  checked="true">
+                            <label for="Remember">Ghi nhớ</label>
+                        </div>
+                        <div class="social-auth-links text-center form-group">
+                            <a ng-click="RequestLoginFB()" class=" btn  btn-block btn-social btn-facebook icoFacebook"
+                               style="color: white"><i class="fa fa-facebook "></i>Facebook</a><br>
+                            <div style="width: 468px; height: 33px" class="g-signin2" data-onsuccess="onSignIn"
+                                 data-theme="dark"></div>
+                        </div>
+                        <span style="color: red">{{status}}</span>
+                        <!--<div >
+                            <button ng-click="crawl()">crawl</button>
+                        </div><br>-->
+                        <div class="form-group">
+                            <br>
+                            <input required type="submit" name="submit" class="btn btn-info btn-md"
+                                   ng-click="loginFunction(inputParam)" value="Đăng nhập">
+                        </div><br>
+                        <div id="register-link" class="text-right">
+                         <span>Bạn chưa có tài khoản? </span>   <a href="http://localhost:8181/register" class="text-info">Đăng kí ngay</a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
+
+

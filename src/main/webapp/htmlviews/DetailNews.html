@@ -1,0 +1,6 @@
+<div style="margin-left: 20px">
+<h3>Nội dung tin tức:{{dataDetailNews.title}}</h3><br>
+<p>Thời gian tạo tin tức:{{dataDetailNews.createTime}}</p>
+<p ng-bind="dataDetailNews.active == 'Y' ? 'Trang thái : ON' : 'Trang thái : OFF'"></p>
+    <p>Nôi dụng:</p></p><p ng-bind-html="dataDetailNews.content"></p>
+</div>

@@ -1,0 +1,78 @@
+<h2 style="margin-left: 500px">Lịch sử giao dịch</h2>
+<div class="row" style="margin-left: 20px">
+    <div ng-if="infoUser" class="col-md-3">
+        <span>Ngân hàng:{{infoUser.bank}}</span><br>
+        <span>STK:{{infoUser.STK}}</span><br>
+        <span>Tên tài khoản:{{infoUser.UserName}}</span><br>
+        <span>Số dư:{{infoUser.soDu}}</span>
+    </div>
+    <div class="col-md-3">
+        <label>Tài khoản</label><br>
+        <select ng-change="getInfoUserBank()" class="selectpicker" data-live-search="true" title="Chọn tài khoản"
+                ng-options="userBank.STK for userBank in listUserBank" ng-model="userBankkk">
+            <option value=""></option>
+        </select>
+    </div>
+    <div class="form-group col-md-3" style="width: 200px">
+        <label>Từ ngày</label>
+        <input type="date" name="bday" max="3000-12-31" id="fromDate"
+               min="1000-01-01" class="form-control" ng-model="datee.fromDate">
+    </div>
+    <div class="form-group col-md-3 " style="width: 200px">
+        <label>Đến ngày</label>
+        <input type="date" name="bday" min="1000-01-01" id="toDate"
+               max="3000-12-31" class="form-control" ng-model="datee.toDate">
+    </div>
+    <input style="width: 150px;margin-top: 24px" required type="submit" name="submit"
+           class="btn btn-info btn-md col-md-2"
+           ng-click="layLogGiaoDich(datee)" id="submitt" value="Tìm kiếm giao dịch">
+</div>
+<div ng-if="dataResponeee" class="box-body row" style="margin-top: 15px;margin-left: 10px">
+    <table id="example2" class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Ngày</th>
+            <th>ngân hàng</th>
+            <th>Nội dung</th>
+            <th>Số tiền</th>
+            <th>Số dư</th>
+            <th>Hành động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="dataa in dataResponeee">
+            <td class="col-md-1.2">{{$index+1}}</td>
+            <td class="col-md-1.2">{{dataa.date}}</td>
+            <td class=col-md-3>{{dataa.bank}}<br>{{dataa.STK}}</td>
+            <td class=col-md-3>{{dataa.content}}</td>
+            <td class=col-md-1.2>{{dataa.price}}</td>
+            <td class=col-md-1.2>{{dataa.surplus}}</td>
+            <td class=col-md-1.2></td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+        <nav aria-label="Page navigation example" style="margin-left: 600px">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+</div>
+
+
+
+
+

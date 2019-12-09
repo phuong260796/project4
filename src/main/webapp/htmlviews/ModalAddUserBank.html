@@ -1,0 +1,53 @@
+<div class="modal-header">
+    <h3>Thêm tài khoản ngân hàng</h3>
+</div>
+<div class="modal-body">
+    <form>
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <div id="login-form" class="form" style="height: auto; width: auto">
+                            <div class="form-group">
+                                <label class="text-info">Tài khoản</label><br>
+                                <!--                            <input required type="text" name="username" ng-init="inputParam.userName='01659046598'" ng-model="inputParam.userName"-->
+                               <!-- <input required type="text" name="username" ng-init="inputParam.userName='0342201133'"-->
+                                <input required type="text" name="username"
+                                       ng-model="inputParam.userName"
+                                       class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label class="text-info">Mật khẩu:</label><br>
+                                <!--                            <input required type="password" name="password" ng-init="inputParam.password='Linh1997'" ng-model="inputParam.password"-->
+                               <!-- <input required type="password" name="password" ng-init="inputParam.password='PHu2607' 19033979727018"-->
+                                <input required type="password" name="password"
+                                       ng-model="inputParam.password"
+                                       class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="text-info">Số tài khoản:</label><br>
+                                <input required type="text"  ng-model="inputParam.STK"
+                                       class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label class="text-info">Ngân hàng:</label><br>
+                                <select  class="form-control mb-2 mr-sm-2 mb-sm-0" ng-init="inputParam.bank = nganhang[0]"   ng-options="nganHang for nganHang in nganhang" ng-model="inputParam.bank"></select>
+                            </div>
+                            <span style="color: red">{{status}}</span>
+                            <span style="color: #0d6aad">{{state}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <div class="form-group">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"  ng-click="cancel()" >Cancel</button>
+        <input required type="submit" name="submit" class="btn btn-info btn-md"
+               ng-click="loginBank(inputParam)" value="Thêm tài khoản">
+    </div>
+    <br>
+</div>

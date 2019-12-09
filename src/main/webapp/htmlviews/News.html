@@ -1,0 +1,68 @@
+<section class="content" >
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">News</h3>
+                </div>
+                <div class="box-body">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Content</th>
+                            <th>Create Time</th>
+                            <th>Active</th>
+                            <th style="text-align: center; margin-bottom: auto; vertical-align: -100px;">
+                                <button class="btn btn-info btn btn-primary a-btn-slide-text" ng-click="addNews()"
+                                        style="margin-bottom: auto; ">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                    <span><strong>Thêm mới</strong></span>
+                                </button>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="data in dataNews" class="new-{{data.id}}">
+                            <td>{{data.title}}</td>
+                            <td><a href="http://localhost:8181/#/DetailNews/{{data.id}}" target="_blank">Nội dung tin tức</a></td>
+                            <td>{{data.createTime}}</td>
+                            <td>
+                                <div class="form-group" style="text-align: center">
+                                    <div class="col-sm-7 col-md-7">
+                                        <div class="input-group">
+                                            <div id="radioBtn" class="btn-group">
+                                                <a ng-class="data.active == 'Y' ? 'active':'notActive'"
+                                                   ng-click="changeActiveNews(data, 'Y')"
+                                                   class="btn btn-primary btn-sm changeY-{{data.id}}"
+                                                   data-toggle="happy"
+                                                   data-title="Y">ON</a>
+                                                <a ng-class="data.active == 'N' ? 'active':'notActive'"
+                                                   ng-click="changeActiveNews(data, 'N')"
+                                                   class="btn btn-primary btn-sm changeN-{{data.id}}"
+                                                   data-toggle="happy"
+                                                   data-title="N">OFF</a>
+                                            </div>
+                                            <input type="hidden" name="happy" id="happy">
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="text-align: center; margin-bottom: auto;">
+                                <a ng-click="updateNewss(data.id)" class="btn btn-primary a-btn-slide-text">
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                    <span><strong>Sửa</strong></span>
+                                </a>
+                                <a ng-click="deleteN(data.id)" class="btn btn-primary a-btn-slide-text ">
+                                    <span class="glyphicon glyphicon-remove " aria-hidden="true"></span>
+                                    <span><strong>Xóa</strong></span>
+                                </a></td>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,108 @@
+<div class="row mb-5" style="">
+
+
+    <div class="col-lg-8 mx-auto">
+        <div class="bg-white p-5 rounded shadow">
+            <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4" style="margin-left: 20px;margin-top: 40px">
+                <div class="input-group">
+                    <input type="search" ng-model="textSearch" placeholder="Nhập link sản phẩm taobao,1688"
+                           aria-describedby="button-addon1"
+                           class="form-control border-0 bg-light" style="width: 1320px">
+                    <div>
+
+<!--                        <button ng-click="test(textSearch)" id="search-product" type="submit"-->
+                        <button ng-click="searchInfoProduct(textSearch)" id="search-product" type="submit"
+                                class="btn btn-link " style="background: lightsalmon"><i
+                                class="fa fa-search">Lấy thông tin sản phẩm</i></button>
+                    </div>
+                </div>
+                <span style="color: red">{{status}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" style="margin-top: 10px">
+    <div class="row">
+        <div class="col-md-4">
+            <span ng-if="data.bigImageUrl"><img  src="{{data.bigImageUrl}}"></span>
+            <ul class="list-image" ng-if="data.imageUrl">
+                <li ng-repeat="dt in data.imageUrl"><a ng-click="imagee(dt)"><img width="60" height="60" src="{{dt}}"/></a></li>
+            </ul>
+            <span><img  src="{{dataTaobao.bigImageUrl}}"></span>
+            <ul class="list-image">
+                <li ng-repeat="dttb in dataTaobao.imageUrl"><a ng-click="clickImage(dttb)"><img width="60" height="60" src="{{dttb}}"/></a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-8">
+            <div style="margin-left: 20px;margin-top: 10px" id="lightSlider">
+                <span ng-if="data.url">Tỷ giá : 1¥ = 3257.08vnđ</span><br ng-if="data.url">
+                <a href="{{data.title}}" target="_blank">{{data.title}}</a><br ng-if="data.title">
+                <span ng-if="data.price">giá(¥):<span ng-bind-html="data.price"></span></span><br ng-if="data.price">
+                <span ng-if="data.priceSale">khuyến mãi(¥):<span ng-bind-html="data.priceSale"></span></span><br
+                    ng-if="data.priceSale">
+                <table ng-if="data.price1688">
+                    <tr>
+                        <td>Giá :</td>
+                        <td ng-repeat="price1688 in data.price1688"><span style="margin: 30px">{{price1688}}</span></td>
+                    </tr>
+                    <tr ng-if="data.priceSale1688">
+                        <td>Giảm giá :</td>
+                        <td ng-repeat="priceSl1688 in data.priceSale1688"><span
+                                style="margin: 30px">{{priceSl1688}}</span></td>
+                    </tr>
+                    <tr>
+                        <td>Điều kiện :</td>
+                        <td ng-repeat="conditionn in data.condition"><span style="margin: 30px">{{conditionn}}</span>
+                        </td>
+                    </tr>
+                </table>
+                <!--<span>{{data.url}}</span><br>-->
+                <span ng-if="dataTaobao.name">{{dataTaobao.name}}</span><br ng-if="dataTaobao.name">
+                <span ng-if="dataTaobao.shopName">Sản phẩm của Shop :{{dataTaobao.shopName}}</span><br
+                    ng-if="dataTaobao.shopName">
+                <span ng-show="dataTaobao.startPrice" class="priceProduct">Giá :
+                    <span style="color: #ff7701">
+                   <span ng-if="dataTaobao.startPrice">¥{{dataTaobao.startPrice}}</span>
+                        <span ng-if="dataTaobao.sellPrice">-¥{{dataTaobao.sellPrice}}</span>
+                       <span ng-if="dataTaobao.startPrice">~{{formatPrice(formatNumber(dataTaobao.startPrice?dataTaobao.startPrice* 3400:"0"))}}đ</span>
+                       <span ng-if="dataTaobao.sellPrice">-{{formatPrice(formatNumber(dataTaobao.sellPrice?dataTaobao.sellPrice*3400:"0"))}}đ</span>
+                    </span>
+                </span><br ng-if="dataTaobao.startPrice">
+                <span class="hidden priceSelected">Giá :¥<span style="color: #ff7701"></span></span><br ng-if="dataTaobao.startPrice">
+                <div ng-repeat="prptProduct in dataTaobao.propertyDTO">
+                <div class="prptProduct" ng-if="prptProduct.title">{{prptProduct.title}}:
+                    <div class="propertiesDTOS" titleProperties="{{prptProduct.title}}" titlee="{{productt.title}}" idProperties="{{productt.id}}"  ng-repeat="productt in prptProduct.propertiesDTOS">
+                       <div ng-if="!productt.image">{{productt.title}}</div>
+                        <div><a ng-if="productt.image"><img width="50" height="50" ng-click="clickImage(productt.image)" src="{{productt.image}}"></a></div>
+                    </div>
+                </div>
+                </div>
+                <br ng-if="dataTaobao.propertyDTO">
+                <span ng-if="dataTaobao.name" class="choose"></span><br ng-if="dataTaobao.name">
+                <div ng-if="dataTaobao">
+                <span>Số lượng:</span><button type="button" ng-click="downAmount()" class="btn btn-default">-</button>
+                <span style="width: 10px">{{Amount}}</span>
+                <button type="button" class="btn btn-default" ng-click="upAmount()">+</button><br>
+                </div>
+                <span class="quantity" ng-if="dataTaobao.quantityStock">Số lượng trong kho còn :{{dataTaobao.quantityStock}} sản phẩm</span>
+                <span class="hidden quaityOnly" ng-if="dataTaobao.quantityStock">Số lượng trong kho còn :<span></span> sản phẩm</span><br>
+                <button ng-if="dataTaobao" ng-click="addcart()" type="button" class="btn btn-warning">Thêm vào giỏ hàng</button>
+                <a ng-if="dataTaobao" href="/#/giohang"  type="button" ng-click="toCart()" class="btn btn-info">Đến giỏ hàng</a>
+            </div>
+        </div>
+    </div>
+    <button ng-click="readFile()">doc file</button>
+    <button ng-click="getdatatech()">sava data techcombank</button><br>
+    <button ng-click="loginnn()">login bank</button><br>
+    <button ng-click="schedule()">schedule</button><br>
+    <button ng-click="schedule2()">schedule 2</button><br>
+    <button ng-click="laygiaodich()">lay giao dich</button><br>
+    <button ng-click="luugiaodich()">luu giao dich</button><br>
+    <button ng-click="luugiaodich2()">luu giao dich 2</button><br>
+    <button ng-click="infor2()">test luu giao dich</button><br>
+</div>
+
+
+

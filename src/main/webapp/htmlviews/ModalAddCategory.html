@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <h3>Add New Category</h3>
+</div>
+<div class="modal-body">
+    <form>
+        <div class="form-group">
+            <label  class="col-form-label">Category Name</label>
+            <input  type="text" class="form-control" ng-model="inputParam">
+        </div>
+        <span style="color: red">{{status}}</span>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal"  ng-click="cancel()" >Cancel</button>
+    <button type="button" class="btn btn-primary" ng-click="ok(inputParam)">Submit</button>
+</div>

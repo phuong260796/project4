@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <link rel="stylesheet" href="../css/register.css">
+    <script src="../ControllerJs/register.js"></script>
+    <script src="../ControllerJs/LoginController.js"></script>
+    <script src="../ControllerJs/RegisterFacebookController.js"></script>
+</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<body ng-app="registerfb">
+
+<div ng-controller="RegisterFacebookController">
+    <form class="container">
+        <h1>Đăng kí</h1>
+        <span style="color: #00a65a">Tài khoản của bạn chưa đăng kí với mạng xã hội này,bạn phải đăng kí để vào hệ thống</span><br>
+        <hr>
+        <label><b>Username</b></label>
+        <input type="text" ng-model="dataa.userName" required>
+
+        <label><b>Password</b></label>
+        <input type="password" ng-model="dataa.password" placeholder="Enter Password" required>
+
+        <label><b>Repeat Password</b></label>
+        <input type="password" ng-model="dataa.passwordRepeat" placeholder="Confirm Password" required><br>
+        <span style="color: red">{{status}}</span>
+        <hr>
+        <button type="submit" class="registerbtn" ng-click="registerFb(dataa)">Register</button>
+        <div class="form-group">
+            <br>
+            <div style="text-align: center;"><a href="http://localhost:8181/login">LOGIN</a></div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
+
+

@@ -1,0 +1,10 @@
+<div class="modal-header">
+</div>
+<div class="modal-body">
+    <h2 ng-model="dataRespone.qtyNews"> Có <a href="http://localhost:8181/#/news/{{dataRespone.categoryId}}" target="_blank">{{dataRespone.qtyNews}} tin tức</a>
+         thuộc danh mục tin tức  này,bạn có muốn xóa không ?</h2>
+</div>
+<div class="modal-footer">
+    <button type="button"  class="btn btn-secondary" data-dismiss="modal"  ng-click="cancel()" >Cancel</button>
+    <button type="button" class="btn btn-primary" ng-click="delete(inputParam)">Delete</button>
+</div>
